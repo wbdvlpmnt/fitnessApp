@@ -52,7 +52,9 @@ export default function ViewExercises() {
           <TouchableOpacity key={exercise.id} style={styles.card}>
             <View>
               <Text style={styles.cardTitle}>{exercise.exerciseName}</Text>
-              <Text>{exercise.exerciseDescription}</Text>
+              <Text style={styles.cardDescription}>
+                {exercise.exerciseDescription}
+              </Text>
             </View>
           </TouchableOpacity>
         );
@@ -77,5 +79,10 @@ const styles = StyleSheet.create({
   },
   cardTitle: {
     color: "#fff",
+    fontSize: 18,
+  },
+  cardDescription: {
+    color: "#fff",
+    fontSize: 14,
   },
 });
