@@ -4,11 +4,7 @@ import React, { useState } from "react";
 import {
   View,
   StyleSheet,
-  Text,
   TextInput,
-  Alert,
-  TouchableOpacity,
-  ScrollView,
 } from "react-native";
 
 export default function Workout() {
