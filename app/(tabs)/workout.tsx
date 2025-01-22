@@ -1,7 +1,15 @@
 import { AddExercise } from "@/components/add-exercise";
-import Button from "@/components/button";
+import ViewExercises from "@/components/view-exercises";
 import React, { useState } from "react";
-import { View, StyleSheet, Text, TextInput, Alert } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  TextInput,
+  Alert,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
 
 export default function Workout() {
   const [workoutName, setWorkoutName] = useState("");
@@ -9,7 +17,7 @@ export default function Workout() {
   return (
     <>
       <View style={styles.container}>
-        <View style={styles.inputForm}>
+        <View style={styles.content}>
           <TextInput
             style={styles.input}
             placeholder="Workout Name"
@@ -19,6 +27,7 @@ export default function Workout() {
           />
         </View>
         <AddExercise />
+        <ViewExercises />
       </View>
     </>
   );
@@ -39,9 +48,11 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     fontSize: 16,
   },
-  inputForm: {
+  content: {
     padding: 20,
     width: "100%",
     alignItems: "center",
+    borderColor: "pink",
+    borderWidth: 2,
   },
 });
