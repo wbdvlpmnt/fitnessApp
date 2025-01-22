@@ -5,7 +5,7 @@ type Props = {
   label: string;
   theme?: "primary";
   onPress?: () => void;
-  fontAwesomeName: any;
+  fontAwesomeName?: any;
 };
 
 export default function Button({
