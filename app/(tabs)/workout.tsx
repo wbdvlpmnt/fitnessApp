@@ -71,6 +71,7 @@ export default function Workout() {
           <Button
             label="Add Exercise"
             theme="primary"
+            fontAwesomeName="send"
             onPress={handleAddExercise}
           />
         </View>

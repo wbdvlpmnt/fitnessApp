@@ -5,10 +5,16 @@ type Props = {
   label: string;
   theme?: "primary";
   onPress?: () => void;
+  fontAwesomeName: any;
 };
 
-export default function Button({ label, theme, onPress }: Props) {
-  if (theme === "primary") {
+export default function Button({
+  label,
+  theme,
+  onPress,
+  fontAwesomeName,
+}: Props) {
+  if (theme === "primary" && fontAwesomeName) {
     return (
       <View
         style={[
@@ -21,7 +27,7 @@ export default function Button({ label, theme, onPress }: Props) {
           onPress={onPress}
         >
           <FontAwesome
-            name="picture-o"
+            name={fontAwesomeName}
             size={18}
             color="#25292e"
             style={styles.buttonIcon}
