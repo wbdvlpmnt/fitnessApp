@@ -5,7 +5,6 @@ export const WorkoutContext = createContext();
 
 // 2. Create Provider Component
 export const WorkoutProvider = ({ children }) => {
-  const [workouts, setWorkouts] = useState([]);
   const [exerciseList, setExerciseList] = useState([
     {
       id: 1,
@@ -53,20 +52,30 @@ export const WorkoutProvider = ({ children }) => {
     setExerciseList((prevExercises) => [...prevExercises, workout]);
   };
 
-  // Remove a workout
-  const removeWorkout = (id) => {
-    setWorkouts((prevWorkouts) => prevWorkouts.filter((w) => w.id !== id));
-  };
-
   const getExerciseList = (workoutName) =>
     exerciseList.filter((exercise) => exercise.workoutName == workoutName);
+
+  const getWorkoutList = () => {
+    // Use a Set to collect unique workout names
+    const workoutSet = new Set();
+
+    exerciseList.forEach((exercise) => {
+      workoutSet.add(exercise.workoutName);
+    });
+
+    // Convert the Set back to an array
+    const workoutList = Array.from(workoutSet).map((workoutName) => ({
+      name: workoutName,
+    }));
+
+    return workoutList;
+  };
 
   return (
     <WorkoutContext.Provider
       value={{
-        workouts,
+        getWorkoutList,
         addExercise,
-        removeWorkout,
         exerciseList,
         getExerciseList,
       }}

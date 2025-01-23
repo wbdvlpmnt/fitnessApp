@@ -1,21 +1,48 @@
 import { AddExercise } from "@/components/add-exercise";
 import ViewExercises from "@/components/view-exercises";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { View, StyleSheet, TextInput } from "react-native";
+import { WorkoutContext } from "@/context/WorkoutContext";
+import DropDownPicker from "react-native-dropdown-picker";
 
 export default function Workout() {
   const [workoutName, setWorkoutName] = useState("");
+  const [workoutList, setWorkoutList] = useState([]);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const { getWorkoutList, exerciseList } = useContext(WorkoutContext);
+
+  useEffect(() => {
+    const workouts = getWorkoutList();
+    const items = workouts.map((workout) => ({
+      label: workout.name,
+      value: workout.name,
+    }));
+    setWorkoutList(items);
+  }, [exerciseList]);
+
+  const handleWorkoutSelect = (name) => {
+    if (!workoutList.find((w) => w === name)) {
+      console.log("add workout");
+    }
+    setWorkoutName(name);
+  };
 
   return (
     <>
       <View style={styles.container}>
         <View style={styles.content}>
-          <TextInput
-            style={styles.input}
-            placeholder="Workout Name"
-            placeholderTextColor="#aaa"
+          <DropDownPicker
+            open={dropdownOpen}
+            setOpen={setDropdownOpen}
+            items={workoutList}
+            setItems={setWorkoutList}
             value={workoutName}
-            onChangeText={setWorkoutName}
+            setValue={handleWorkoutSelect}
+            placeholder="Select or Create Workout"
+            searchable
+            style={styles.dropdown}
+            textStyle={styles.dropdownText}
           />
         </View>
         <AddExercise workoutName={workoutName} />
@@ -46,5 +73,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderColor: "pink",
     borderWidth: 2,
+  },
+  dropdown: {
+    width: "100%",
+    backgroundColor: "#3a3f47",
+    borderColor: "#aaa",
+  },
+  dropdownText: {
+    color: "#3a3f47",
+    fontSize: 16,
   },
 });
