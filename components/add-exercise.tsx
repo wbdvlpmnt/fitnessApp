@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { View, TextInput, StyleSheet, Alert } from "react-native";
 import Button from "./button";
+import { WorkoutContext } from "../context/WorkoutContext";
 
-export function AddExercise() {
+export function AddExercise({ workoutName }) {
   const [exerciseName, setExerciseName] = useState("");
   const [exerciseDescription, setExerciseDescription] = useState("");
   const [exerciseDuration, setExerciseDuration] = useState(0);
   const [exerciseDurationUnits, setExerciseDurationUnits] = useState("");
+  const { addExercise } = useContext(WorkoutContext);
 
   function clearForm() {
     setExerciseName("");
@@ -21,7 +23,10 @@ export function AddExercise() {
       exerciseDescription,
       exerciseDuration,
       exerciseDurationUnits,
+      workoutName,
     };
+    addExercise(newExercisePayload);
+    setExerciseName(exerciseName);
     clearForm();
     Alert.alert("Exercise Added!");
   }

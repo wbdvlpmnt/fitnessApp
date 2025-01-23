@@ -49,9 +49,8 @@ export const WorkoutProvider = ({ children }) => {
     },
   ]);
 
-  // Add a workout
-  const addWorkout = (workout) => {
-    setWorkouts((prevWorkouts) => [...prevWorkouts, workout]);
+  const addExercise = (workout) => {
+    setExerciseList((prevExercises) => [...prevExercises, workout]);
   };
 
   // Remove a workout
@@ -66,7 +65,7 @@ export const WorkoutProvider = ({ children }) => {
     <WorkoutContext.Provider
       value={{
         workouts,
-        addWorkout,
+        addExercise,
         removeWorkout,
         exerciseList,
         getExerciseList,
