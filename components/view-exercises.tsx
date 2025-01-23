@@ -5,49 +5,15 @@ import {
   View,
   Text,
 } from "react-native";
+import { WorkoutContext } from "../context/WorkoutContext";
+import { useContext } from "react";
 
 export default function ViewExercises() {
-  const fakeWorkoutList = [
-    {
-      id: 1,
-      exerciseName: "Push-ups",
-      exerciseDescription: "3 Sets - regular, wide, narrow",
-      exerciseDuration: 20,
-      exerciseDurationUnits: "reps",
-    },
-    {
-      id: 2,
-      exerciseName: "Sit-ups",
-      exerciseDescription: "3 Sets",
-      exerciseDuration: 20,
-      exerciseDurationUnits: "reps",
-    },
-    {
-      id: 3,
-      exerciseName: "Squats",
-      exerciseDescription: "Squat in-place",
-      exerciseDuration: 20,
-      exerciseDurationUnits: "reps",
-    },
-    {
-      id: 4,
-      exerciseName: "Walk",
-      exerciseDescription: "walking on treadmill",
-      exerciseDuration: 20,
-      exerciseDurationUnits: "minutes",
-    },
-    {
-      id: 5,
-      exerciseName: "Stretching",
-      exerciseDescription: "various stretches",
-      exerciseDuration: 5,
-      exerciseDurationUnits: "variants",
-    },
-  ];
+  const { exerciseList } = useContext(WorkoutContext);
 
   return (
     <ScrollView style={styles.workoutContainer}>
-      {fakeWorkoutList.map((exercise) => {
+      {exerciseList.map((exercise) => {
         return (
           <TouchableOpacity key={exercise.id} style={styles.card}>
             <View>
