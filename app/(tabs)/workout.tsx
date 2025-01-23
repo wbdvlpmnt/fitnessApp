@@ -7,7 +7,9 @@ import DropDownPicker from "react-native-dropdown-picker";
 
 export default function Workout() {
   const [workoutName, setWorkoutName] = useState("");
-  const [workoutList, setWorkoutList] = useState([]);
+  const [workoutList, setWorkoutList] = useState<
+    { label: string; value: string }[]
+  >([]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const { getWorkoutList, exerciseList } = useContext(WorkoutContext);
@@ -21,11 +23,20 @@ export default function Workout() {
     setWorkoutList(items);
   }, [exerciseList]);
 
-  const handleWorkoutSelect = (name) => {
-    if (!workoutList.find((w) => w === name)) {
-      console.log("add workout");
-    }
-    setWorkoutName(name);
+  const handleWorkoutSelect = (name: string) => {
+    console.log("Selected or added workout:", name);
+
+    if (!name) return; // Avoid handling null or empty names
+
+    setWorkoutList((prevWorkoutList) => {
+      if (prevWorkoutList.some((workout) => workout.value === name)) {
+        return prevWorkoutList; // Avoid duplicates
+      }
+      console.log("Adding new workout:", name); // Debugging
+      return [...prevWorkoutList, { label: name, value: name }];
+    });
+
+    setWorkoutName(name); // Update the selected workout
   };
 
   return (
@@ -38,7 +49,14 @@ export default function Workout() {
             items={workoutList}
             setItems={setWorkoutList}
             value={workoutName}
-            setValue={handleWorkoutSelect}
+            setValue={(callbackOrValue) => {
+              const name =
+                typeof callbackOrValue === "function"
+                  ? callbackOrValue(workoutName)
+                  : callbackOrValue;
+
+              handleWorkoutSelect(name);
+            }}
             placeholder="Select or Create Workout"
             searchable
             style={styles.dropdown}
