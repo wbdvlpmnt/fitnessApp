@@ -14,7 +14,7 @@ export default function ViewExercises({ workoutName }) {
 
   useEffect(() => {
     setExercises(getExerciseList(workoutName));
-  }, [workoutName]);
+  }, [workoutName, exerciseList]);
 
   return (
     <ScrollView style={styles.workoutContainer}>
