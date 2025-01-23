@@ -6,14 +6,19 @@ import {
   Text,
 } from "react-native";
 import { WorkoutContext } from "../context/WorkoutContext";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 
-export default function ViewExercises() {
-  const { exerciseList } = useContext(WorkoutContext);
+export default function ViewExercises({ workoutName }) {
+  const [exercises, setExercises] = useState([]);
+  const { exerciseList, getExerciseList } = useContext(WorkoutContext);
+
+  useEffect(() => {
+    setExercises(getExerciseList(workoutName));
+  }, [workoutName]);
 
   return (
     <ScrollView style={styles.workoutContainer}>
-      {exerciseList.map((exercise) => {
+      {exercises.map((exercise) => {
         return (
           <TouchableOpacity key={exercise.id} style={styles.card}>
             <View>

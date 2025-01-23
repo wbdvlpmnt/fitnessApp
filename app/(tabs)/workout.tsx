@@ -1,11 +1,7 @@
 import { AddExercise } from "@/components/add-exercise";
 import ViewExercises from "@/components/view-exercises";
 import React, { useState } from "react";
-import {
-  View,
-  StyleSheet,
-  TextInput,
-} from "react-native";
+import { View, StyleSheet, TextInput } from "react-native";
 
 export default function Workout() {
   const [workoutName, setWorkoutName] = useState("");
@@ -23,7 +19,7 @@ export default function Workout() {
           />
         </View>
         <AddExercise />
-        <ViewExercises />
+        <ViewExercises workoutName={workoutName} />
       </View>
     </>
   );

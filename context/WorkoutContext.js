@@ -13,6 +13,7 @@ export const WorkoutProvider = ({ children }) => {
       exerciseDescription: "3 Sets - regular, wide, narrow",
       exerciseDuration: 20,
       exerciseDurationUnits: "reps",
+      workoutName: "Monday",
     },
     {
       id: 2,
@@ -20,6 +21,7 @@ export const WorkoutProvider = ({ children }) => {
       exerciseDescription: "3 Sets",
       exerciseDuration: 20,
       exerciseDurationUnits: "reps",
+      workoutName: "Monday",
     },
     {
       id: 3,
@@ -27,6 +29,7 @@ export const WorkoutProvider = ({ children }) => {
       exerciseDescription: "Squat in-place",
       exerciseDuration: 20,
       exerciseDurationUnits: "reps",
+      workoutName: "Tuesday",
     },
     {
       id: 4,
@@ -34,6 +37,7 @@ export const WorkoutProvider = ({ children }) => {
       exerciseDescription: "walking on treadmill",
       exerciseDuration: 20,
       exerciseDurationUnits: "minutes",
+      workoutName: "Tuesday",
     },
     {
       id: 5,
@@ -41,6 +45,7 @@ export const WorkoutProvider = ({ children }) => {
       exerciseDescription: "various stretches",
       exerciseDuration: 5,
       exerciseDurationUnits: "variants",
+      workoutName: "Tuesday",
     },
   ]);
 
@@ -54,9 +59,18 @@ export const WorkoutProvider = ({ children }) => {
     setWorkouts((prevWorkouts) => prevWorkouts.filter((w) => w.id !== id));
   };
 
+  const getExerciseList = (workoutName) =>
+    exerciseList.filter((exercise) => exercise.workoutName == workoutName);
+
   return (
     <WorkoutContext.Provider
-      value={{ workouts, addWorkout, removeWorkout, exerciseList }}
+      value={{
+        workouts,
+        addWorkout,
+        removeWorkout,
+        exerciseList,
+        getExerciseList,
+      }}
     >
       {children}
     </WorkoutContext.Provider>
