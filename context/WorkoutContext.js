@@ -49,8 +49,12 @@ export const WorkoutProvider = ({ children }) => {
     },
   ]);
 
-  const addExercise = (workout) => {
-    setExerciseList((prevExercises) => [...prevExercises, workout]);
+  const addExercise = (ex) => {
+    setExerciseList((prevExercises) => [...prevExercises, ex]);
+  };
+
+  const addWorkout = (workout) => {
+    setWorkouts((prev) => [...prev, workout]);
   };
 
   // Remove a workout
@@ -69,6 +73,7 @@ export const WorkoutProvider = ({ children }) => {
         removeWorkout,
         exerciseList,
         getExerciseList,
+        addWorkout,
       }}
     >
       {children}
