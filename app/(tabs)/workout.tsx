@@ -24,7 +24,10 @@ export default function Workout() {
             />
           )}
           {active === "Existing" && (
-            <ExistingWorkout workoutName={workoutName} />
+            <ExistingWorkout
+              workoutName={workoutName}
+              setWorkoutName={setWorkoutName}
+            />
           )}
         </View>
       </View>

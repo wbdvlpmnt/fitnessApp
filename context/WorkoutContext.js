@@ -5,7 +5,7 @@ export const WorkoutContext = createContext();
 
 // 2. Create Provider Component
 export const WorkoutProvider = ({ children }) => {
-  const [workouts, setWorkouts] = useState([]);
+  const [workouts, setWorkouts] = useState(["Monday", "Tuesday"]);
   const [exerciseList, setExerciseList] = useState([
     {
       id: 1,
