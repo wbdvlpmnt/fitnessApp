@@ -91,8 +91,13 @@ export const WorkoutProvider = ({ children }) => {
   };
 
   // Remove a workout
-  const removeWorkout = (id) => {
-    setWorkouts((prevWorkouts) => prevWorkouts.filter((w) => w.id !== id));
+  const removeWorkout = (workoutName) => {
+    setExerciseList((prevExercise) =>
+      prevExercise.filter((e) => e.workoutName !== workoutName)
+    );
+    setWorkouts((prevWorkouts) =>
+      prevWorkouts.filter((w) => w !== workoutName)
+    );
   };
 
   const getExerciseList = (workoutName) =>

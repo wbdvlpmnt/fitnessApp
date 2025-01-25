@@ -40,7 +40,12 @@ export default function ExistingWorkout({ workoutName, setWorkoutName }) {
         placeholder="Select Your Workout"
       />
 
-      {workoutName ? <DeleteWorkout /> : null}
+      {workoutName ? (
+        <DeleteWorkout
+          workoutName={workoutName}
+          setWorkoutName={setWorkoutName}
+        />
+      ) : null}
 
       <AddExercise workoutName={workoutName} />
       <ViewExercises workoutName={workoutName} />
