@@ -19,7 +19,7 @@ export default function Button({
       <View
         style={[
           styles.buttonContainer,
-          { borderWidth: 4, borderColor: "#ffd33d", borderRadius: 18 },
+          { borderWidth: 4, borderColor: "#3dffff", borderRadius: 18 },
         ]}
       >
         <Pressable

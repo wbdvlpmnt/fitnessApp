@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
   },
   activeButton: {
-    backgroundColor: "#ffd33d", // Highlight for the active button
+    backgroundColor: "#3dffff", // Highlight for the active button
   },
   text: {
     color: "#fff",

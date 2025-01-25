@@ -1,10 +1,11 @@
-import { Text } from "react-native";
+import { Text, TouchableOpacity } from "react-native";
 import { AddExercise } from "./add-exercise";
 import ViewExercises from "./view-exercises";
 import DropDownPicker from "react-native-dropdown-picker";
 import { useContext, useEffect, useState } from "react";
 import React from "react";
 import { WorkoutContext } from "@/context/WorkoutContext";
+import DeleteWorkout from "./delete-workout";
 
 export default function ExistingWorkout({ workoutName, setWorkoutName }) {
   const [open, setOpen] = useState(false);
@@ -38,6 +39,9 @@ export default function ExistingWorkout({ workoutName, setWorkoutName }) {
         setItems={setItems}
         placeholder="Select Your Workout"
       />
+
+      {workoutName ? <DeleteWorkout /> : null}
+
       <AddExercise workoutName={workoutName} />
       <ViewExercises workoutName={workoutName} />
     </>
