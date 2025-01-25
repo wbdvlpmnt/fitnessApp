@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 import { Text, TextInput, StyleSheet, View, Alert } from "react-native";
 import Button from "./button";
@@ -6,6 +6,10 @@ import { WorkoutContext } from "@/context/WorkoutContext";
 
 export default function NewWorkout({ workoutName, setWorkoutName, setActive }) {
   const { addWorkout } = useContext(WorkoutContext);
+
+  useEffect(()=>{
+    setWorkoutName("")
+  }, [])
 
   function handleAddNewWorkout(workoutName) {
     addWorkout(workoutName);
