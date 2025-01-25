@@ -35,8 +35,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   workoutContainer: {
-    borderColor: "pink",
-    borderWidth: 2,
     width: "100%",
     padding: 20,
     height: "35%",

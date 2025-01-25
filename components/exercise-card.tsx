@@ -10,15 +10,22 @@ import {
 } from "react-native";
 
 export default function ExerciseCard({ exercise }) {
-  const { removeExercise } = useContext(WorkoutContext);
+  const { removeExercise, exerciseToEdit } = useContext(WorkoutContext);
 
   function handleRemoveExercise(id) {
     console.log("removing", id);
     removeExercise(id);
   }
 
+  function handleEditExercise(id) {
+    exerciseToEdit(id);
+  }
+
   return (
-    <TouchableOpacity style={styles.card}>
+    <TouchableOpacity
+      style={styles.card}
+      onPress={() => handleEditExercise(exercise.id)}
+    >
       <View>
         <Text style={styles.cardTitle}>{exercise.exerciseName}</Text>
         <Text style={styles.cardDescription}>

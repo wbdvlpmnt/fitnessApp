@@ -48,10 +48,39 @@ export const WorkoutProvider = ({ children }) => {
       workoutName: "Tuesday",
     },
   ]);
+  const [editExercise, setEditExercise] = useState();
 
   const addExercise = (ex) => {
     setExerciseList((prevExercises) => [...prevExercises, ex]);
   };
+
+  const updateExercise = (updatedExercise) => {
+    // Ensure the updated exercise has a valid id before proceeding
+    if (!updatedExercise.id) {
+      console.error("Error: updatedExercise does not have a valid id.");
+      return;
+    }
+
+    // Update the exercise list
+    setExerciseList((prevExercises) =>
+      prevExercises.map(
+        (exercise) =>
+          exercise.id === updatedExercise.id
+            ? { ...exercise, ...updatedExercise } // Update the matching exercise
+            : exercise // Keep others unchanged
+      )
+    );
+
+    // Reset edit mode
+    setEditExercise(null);
+  };
+
+  const exerciseToEdit = (id) => {
+    const exercise = exerciseList.filter((e) => e.id == id)[0];
+    setEditExercise(exercise);
+  };
+
+  const clearExerciseToEdit = () => setEditExercise();
 
   const addWorkout = (workout) => {
     setWorkouts((prev) => [...prev, workout]);
@@ -79,6 +108,10 @@ export const WorkoutProvider = ({ children }) => {
         getExerciseList,
         addWorkout,
         removeExercise,
+        exerciseToEdit,
+        editExercise,
+        updateExercise,
+        clearExerciseToEdit,
       }}
     >
       {children}

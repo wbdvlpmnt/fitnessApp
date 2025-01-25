@@ -1,20 +1,36 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { View, TextInput, StyleSheet, Alert } from "react-native";
 import Button from "./button";
 import { WorkoutContext } from "../context/WorkoutContext";
+import "react-native-get-random-values";
+import { v4 as uuidv4 } from "uuid";
 
 export function AddExercise({ workoutName }) {
   const [exerciseName, setExerciseName] = useState("");
   const [exerciseDescription, setExerciseDescription] = useState("");
   const [exerciseDuration, setExerciseDuration] = useState(0);
   const [exerciseDurationUnits, setExerciseDurationUnits] = useState("");
-  const { addExercise } = useContext(WorkoutContext);
+  const { addExercise, editExercise, updateExercise } =
+    useContext(WorkoutContext);
+  const [id, setId] = useState();
+
+  useEffect(() => {
+    clearForm();
+    if (editExercise) {
+      setExerciseName(editExercise["exerciseName"]);
+      setExerciseDescription(editExercise["exerciseDescription"]);
+      setExerciseDuration(editExercise["exerciseDuration"]);
+      setExerciseDurationUnits(editExercise["exerciseDurationUnits"]);
+      setId(editExercise["id"]);
+    }
+  }, [editExercise, workoutName]);
 
   function clearForm() {
     setExerciseName("");
     setExerciseDescription("");
     setExerciseDuration(0);
     setExerciseDurationUnits("");
+    setId(undefined);
   }
 
   function handleAddExercise() {
@@ -24,11 +40,25 @@ export function AddExercise({ workoutName }) {
       exerciseDuration,
       exerciseDurationUnits,
       workoutName,
+      id: uuidv4(),
     };
     addExercise(newExercisePayload);
-    setExerciseName(exerciseName);
     clearForm();
     Alert.alert("Exercise Added!");
+  }
+
+  function handleEditExercise() {
+    const editExercisePayload = {
+      exerciseName,
+      exerciseDescription,
+      exerciseDuration,
+      exerciseDurationUnits,
+      workoutName,
+      id,
+    };
+    updateExercise(editExercisePayload);
+    clearForm();
+    Alert.alert("Exercise Saved!");
   }
 
   return (
@@ -62,9 +92,9 @@ export function AddExercise({ workoutName }) {
         onChangeText={setExerciseDurationUnits}
       />
       <Button
-        label="Add Exercise"
+        label={editExercise ? "Save Exercise" : "Add Exercise"}
         theme="primary"
-        onPress={handleAddExercise}
+        onPress={editExercise ? handleEditExercise : handleAddExercise}
         fontAwesomeName="send"
       />
     </View>

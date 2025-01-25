@@ -13,7 +13,7 @@ export default function ExistingWorkout({ workoutName, setWorkoutName }) {
     { label: "Apple", value: "apple" },
     { label: "Banana", value: "banana" },
   ]);
-  const { workouts } = useContext(WorkoutContext);
+  const { workouts, clearExerciseToEdit } = useContext(WorkoutContext);
 
   useEffect(() => {
     // setValue(workoutName);
@@ -24,7 +24,8 @@ export default function ExistingWorkout({ workoutName, setWorkoutName }) {
       };
     });
     setItems(choices);
-  }, [workouts]);
+    clearExerciseToEdit();
+  }, [workouts, workoutName]);
 
   return (
     <>
