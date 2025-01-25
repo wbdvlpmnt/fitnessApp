@@ -1,6 +1,22 @@
-import { TouchableOpacity, View, StyleSheet, Text } from "react-native";
+import { WorkoutContext } from "@/context/WorkoutContext";
+import { FontAwesome } from "@expo/vector-icons";
+import { useContext } from "react";
+import {
+  TouchableOpacity,
+  View,
+  StyleSheet,
+  Text,
+  GestureResponderEvent,
+} from "react-native";
 
 export default function ExerciseCard({ exercise }) {
+  const { removeExercise } = useContext(WorkoutContext);
+
+  function handleRemoveExercise(id) {
+    console.log("removing", id);
+    removeExercise(id);
+  }
+
   return (
     <TouchableOpacity style={styles.card}>
       <View>
@@ -9,6 +25,12 @@ export default function ExerciseCard({ exercise }) {
           {exercise.exerciseDescription}
         </Text>
       </View>
+      <FontAwesome
+        name={"remove"}
+        size={22}
+        color="#fff"
+        onPress={() => handleRemoveExercise(exercise.id)}
+      />
     </TouchableOpacity>
   );
 }
@@ -20,6 +42,9 @@ const styles = StyleSheet.create({
     color: "#fff",
     width: "100%",
     marginTop: 10,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   workoutContainer: {
     borderColor: "pink",

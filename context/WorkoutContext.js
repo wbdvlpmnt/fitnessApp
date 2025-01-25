@@ -57,6 +57,10 @@ export const WorkoutProvider = ({ children }) => {
     setWorkouts((prev) => [...prev, workout]);
   };
 
+  const removeExercise = (id) => {
+    setExerciseList((prevExercise) => prevExercise.filter((e) => e.id !== id));
+  };
+
   // Remove a workout
   const removeWorkout = (id) => {
     setWorkouts((prevWorkouts) => prevWorkouts.filter((w) => w.id !== id));
@@ -74,6 +78,7 @@ export const WorkoutProvider = ({ children }) => {
         exerciseList,
         getExerciseList,
         addWorkout,
+        removeExercise,
       }}
     >
       {children}
