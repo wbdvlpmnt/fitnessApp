@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#25292e",
     alignItems: "center",
+    paddingTop: 20, // Added padding for better UI
   },
   content: {
     padding: 20,
@@ -47,5 +48,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     display: "flex",
     justifyContent: "space-between",
+    backgroundColor: "#1e1e1e", // Changed background color for better contrast
+    borderRadius: 10, // Added border radius for better UI
   },
 });

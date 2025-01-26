@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { View, TextInput, StyleSheet, Alert } from "react-native";
+import { View, TextInput, StyleSheet, Alert, ScrollView } from "react-native";
 import Button from "./button";
 import { WorkoutContext } from "../context/WorkoutContext";
 import "react-native-get-random-values";
@@ -10,12 +10,12 @@ export function AddExercise({ workoutName }) {
   const [exerciseDescription, setExerciseDescription] = useState("");
   const [exerciseDuration, setExerciseDuration] = useState(0);
   const [exerciseDurationUnits, setExerciseDurationUnits] = useState("");
-  const { addExercise, editExercise, updateExercise } =
+  const { addExercise, editExercise, updateExercise, clearExerciseToEdit } =
     useContext(WorkoutContext);
   const [id, setId] = useState();
 
   useEffect(() => {
-    clearForm();
+    // clearForm();
     if (editExercise) {
       setExerciseName(editExercise["exerciseName"]);
       setExerciseDescription(editExercise["exerciseDescription"]);
@@ -31,9 +31,19 @@ export function AddExercise({ workoutName }) {
     setExerciseDuration(0);
     setExerciseDurationUnits("");
     setId(undefined);
+    clearExerciseToEdit();
   }
 
   function handleAddExercise() {
+    if (
+      !exerciseName ||
+      !exerciseDescription ||
+      !exerciseDuration ||
+      !exerciseDurationUnits
+    ) {
+      Alert.alert("All fields are required");
+      return;
+    }
     const newExercisePayload = {
       exerciseName,
       exerciseDescription,
@@ -48,6 +58,15 @@ export function AddExercise({ workoutName }) {
   }
 
   function handleEditExercise() {
+    if (
+      !exerciseName ||
+      !exerciseDescription ||
+      !exerciseDuration ||
+      !exerciseDurationUnits
+    ) {
+      Alert.alert("All fields are required");
+      return;
+    }
     const editExercisePayload = {
       exerciseName,
       exerciseDescription,
@@ -62,7 +81,7 @@ export function AddExercise({ workoutName }) {
   }
 
   return (
-    <View style={styles.inputForm}>
+    <ScrollView contentContainerStyle={styles.inputForm}>
       <TextInput
         style={styles.input}
         placeholder="Exercise Name"
@@ -80,6 +99,7 @@ export function AddExercise({ workoutName }) {
       <TextInput
         style={styles.input}
         keyboardType="numeric"
+        placeholder="Exercise Duration"
         placeholderTextColor="#aaa"
         value={String(exerciseDuration)}
         onChangeText={(d) => setExerciseDuration(+d)}
@@ -91,19 +111,31 @@ export function AddExercise({ workoutName }) {
         value={exerciseDurationUnits}
         onChangeText={setExerciseDurationUnits}
       />
-      <Button
-        label={editExercise ? "Save Exercise" : "Add Exercise"}
-        theme="primary"
-        onPress={editExercise ? handleEditExercise : handleAddExercise}
-        fontAwesomeName="send"
-      />
-    </View>
+      <View style={styles.buttonContainer}>
+        <Button
+          label={editExercise ? "Save Exercise" : "Add Exercise"}
+          theme="primary"
+          onPress={editExercise ? handleEditExercise : handleAddExercise}
+          fontAwesomeName="send"
+        />
+        {editExercise && (
+          <Button label="Cancel Edit" theme="secondary" onPress={clearForm} />
+        )}
+      </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  input: {
+  inputForm: {
+    padding: 20,
     width: "100%",
+    height: "100%",
+    alignItems: "center",
+    backgroundColor: "#1e1e1e", // Changed background color for better contrast
+  },
+  input: {
+    width: 300,
     backgroundColor: "#3a3f47",
     color: "#fff",
     borderRadius: 8,
@@ -111,9 +143,9 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     fontSize: 16,
   },
-  inputForm: {
-    padding: 20,
-    width: "100%",
-    alignItems: "center",
+  buttonContainer: {
+    display: "flex",
+    height: 150,
+    justifyContent: "space-between",
   },
 });

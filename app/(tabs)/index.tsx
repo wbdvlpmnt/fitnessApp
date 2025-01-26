@@ -5,7 +5,7 @@ export default function Index() {
   return (
     <>
       <View style={styles.container}>
-        <Text>Fitness Tracker Home</Text>
+        <Text style={styles.title}>Fitness Tracker Home</Text>
       </View>
     </>
   );
@@ -16,5 +16,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#25292e",
     alignItems: "center",
+    justifyContent: "center", // Centered content for better UI
+  },
+  title: {
+    color: "#fff",
+    fontSize: 24,
+    fontWeight: "bold", // Added bold font weight for better readability
   },
 });

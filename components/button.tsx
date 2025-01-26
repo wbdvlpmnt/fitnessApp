@@ -3,7 +3,7 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 type Props = {
   label: string;
-  theme?: "primary";
+  theme?: "primary" | "secondary";
   onPress?: () => void;
   fontAwesomeName?: any;
 };
@@ -35,6 +35,19 @@ export default function Button({
           <Text style={[styles.buttonLabel, { color: "#25292e" }]}>
             {label}
           </Text>
+        </Pressable>
+      </View>
+    );
+  }
+
+  if (theme === "secondary") {
+    return (
+      <View style={styles.buttonContainer}>
+        <Pressable
+          style={[styles.button, { backgroundColor: "#3a3f47" }]}
+          onPress={onPress}
+        >
+          <Text style={[styles.buttonLabel, { color: "#fff" }]}>{label}</Text>
         </Pressable>
       </View>
     );

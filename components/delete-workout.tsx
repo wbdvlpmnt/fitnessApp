@@ -15,7 +15,7 @@ export default function DeleteWorkout({ workoutName, setWorkoutName }) {
       style={styles.container}
       onPress={() => handleRemoveWorkout()}
     >
-      <FontAwesome name="trash" size={18} color="#fff" />
+      <FontAwesome name="trash" size={18} color="#ff4d4d" />
 
       <Text style={styles.text}>Delete Workout</Text>
     </TouchableOpacity>
@@ -25,10 +25,11 @@ export default function DeleteWorkout({ workoutName, setWorkoutName }) {
 const styles = StyleSheet.create({
   container: {
     margin: 10,
-    width: 125,
+    width: 150,
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
   },
   text: {
     color: "#fff",

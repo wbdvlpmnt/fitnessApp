@@ -7,11 +7,15 @@ import { WorkoutContext } from "@/context/WorkoutContext";
 export default function NewWorkout({ workoutName, setWorkoutName, setActive }) {
   const { addWorkout } = useContext(WorkoutContext);
 
-  useEffect(()=>{
-    setWorkoutName("")
-  }, [])
+  useEffect(() => {
+    setWorkoutName("");
+  }, []);
 
   function handleAddNewWorkout(workoutName) {
+    if (workoutName.trim() === "") {
+      Alert.alert("Workout name cannot be empty");
+      return;
+    }
     addWorkout(workoutName);
     setActive("Existing");
   }
@@ -26,12 +30,19 @@ export default function NewWorkout({ workoutName, setWorkoutName, setActive }) {
         value={workoutName}
         onChangeText={setWorkoutName}
       />
-      <Button
-        label="Save Workout"
-        theme="primary"
-        fontAwesomeName="save"
-        onPress={() => handleAddNewWorkout(workoutName)}
-      ></Button>
+      <View style={styles.buttonContainer}>
+        <Button
+          label="Save Workout"
+          theme="primary"
+          fontAwesomeName="save"
+          onPress={() => handleAddNewWorkout(workoutName)}
+        />
+        {/* <Button
+          label="Cancel"
+          theme="secondary"
+          onPress={() => setActive("Existing")}
+        /> */}
+      </View>
     </View>
   );
 }
@@ -60,5 +71,10 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     color: "#fff",
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
   },
 });
