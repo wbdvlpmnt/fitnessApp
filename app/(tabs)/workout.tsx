@@ -40,10 +40,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#25292e",
     alignItems: "center",
-    paddingTop: 20, // Added padding for better UI
+    paddingTop: 5, // Added padding for better UI
   },
   content: {
-    padding: 20,
+    padding: 15,
     width: "100%",
     alignItems: "center",
     display: "flex",

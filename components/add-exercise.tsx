@@ -132,10 +132,10 @@ export function AddExercise({ workoutName }) {
         />
       </View>
       <View style={styles.inputGroup}>
-        <Text style={styles.label}>Unit of measure for Reps, Duration</Text>
+        <Text style={styles.label}>Unit of measure for Reps or Duration</Text>
         <TextInput
           style={styles.input}
-          placeholder="Unit of measure for Reps, Duration"
+          placeholder="Unit of measure for Reps or Duration"
           placeholderTextColor="#aaa"
           value={exerciseDurationUnits}
           onChangeText={setExerciseDurationUnits}

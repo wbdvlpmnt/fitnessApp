@@ -24,8 +24,8 @@ export default function DeleteWorkout({ workoutName, setWorkoutName }) {
 
 const styles = StyleSheet.create({
   container: {
-    margin: 5,
-    width: 150,
+    margin: 3,
+    width: 100,
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
