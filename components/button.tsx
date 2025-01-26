@@ -6,6 +6,7 @@ type Props = {
   theme?: "primary" | "secondary";
   onPress?: () => void;
   fontAwesomeName?: any;
+  disabled?: boolean; // Added disabled prop
 };
 
 export default function Button({
@@ -13,6 +14,7 @@ export default function Button({
   theme,
   onPress,
   fontAwesomeName,
+  disabled,
 }: Props) {
   if (theme === "primary" && fontAwesomeName) {
     return (
@@ -23,16 +25,25 @@ export default function Button({
         ]}
       >
         <Pressable
-          style={[styles.button, { backgroundColor: "#fff" }]}
+          style={[
+            styles.button,
+            { backgroundColor: disabled ? "#aaa" : "#fff" }, // Change background color if disabled
+          ]}
           onPress={onPress}
+          disabled={disabled} // Disable button if disabled prop is true
         >
           <FontAwesome
             name={fontAwesomeName}
             size={18}
-            color="#25292e"
+            color={disabled ? "#555" : "#25292e"} // Change icon color if disabled
             style={styles.buttonIcon}
           />
-          <Text style={[styles.buttonLabel, { color: "#25292e" }]}>
+          <Text
+            style={[
+              styles.buttonLabel,
+              { color: disabled ? "#555" : "#25292e" }, // Change text color if disabled
+            ]}
+          >
             {label}
           </Text>
         </Pressable>
@@ -44,10 +55,21 @@ export default function Button({
     return (
       <View style={styles.buttonContainer}>
         <Pressable
-          style={[styles.button, { backgroundColor: "#3a3f47" }]}
+          style={[
+            styles.button,
+            { backgroundColor: disabled ? "#555" : "#3a3f47" }, // Change background color if disabled
+          ]}
           onPress={onPress}
+          disabled={disabled} // Disable button if disabled prop is true
         >
-          <Text style={[styles.buttonLabel, { color: "#fff" }]}>{label}</Text>
+          <Text
+            style={[
+              styles.buttonLabel,
+              { color: disabled ? "#aaa" : "#fff" }, // Change text color if disabled
+            ]}
+          >
+            {label}
+          </Text>
         </Pressable>
       </View>
     );
@@ -55,8 +77,19 @@ export default function Button({
 
   return (
     <View style={styles.buttonContainer}>
-      <Pressable style={styles.button} onPress={onPress}>
-        <Text style={styles.buttonLabel}>{label}</Text>
+      <Pressable
+        style={styles.button}
+        onPress={onPress}
+        disabled={disabled} // Disable button if disabled prop is true
+      >
+        <Text
+          style={[
+            styles.buttonLabel,
+            { color: disabled ? "#aaa" : "#fff" }, // Change text color if disabled
+          ]}
+        >
+          {label}
+        </Text>
       </Pressable>
     </View>
   );

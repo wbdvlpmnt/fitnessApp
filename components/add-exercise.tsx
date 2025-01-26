@@ -15,13 +15,14 @@ export function AddExercise({ workoutName }) {
   const [id, setId] = useState();
 
   useEffect(() => {
-    // clearForm();
     if (editExercise) {
       setExerciseName(editExercise["exerciseName"]);
       setExerciseDescription(editExercise["exerciseDescription"]);
       setExerciseDuration(editExercise["exerciseDuration"]);
       setExerciseDurationUnits(editExercise["exerciseDurationUnits"]);
       setId(editExercise["id"]);
+    } else {
+      clearForm();
     }
   }, [editExercise, workoutName]);
 
@@ -88,6 +89,7 @@ export function AddExercise({ workoutName }) {
         placeholderTextColor="#aaa"
         value={exerciseName}
         onChangeText={setExerciseName}
+        editable={!!workoutName} // Disable input if no workout is selected
       />
       <TextInput
         style={styles.input}
@@ -95,6 +97,7 @@ export function AddExercise({ workoutName }) {
         placeholderTextColor="#aaa"
         value={exerciseDescription}
         onChangeText={setExerciseDescription}
+        editable={!!workoutName} // Disable input if no workout is selected
       />
       <TextInput
         style={styles.input}
@@ -103,6 +106,7 @@ export function AddExercise({ workoutName }) {
         placeholderTextColor="#aaa"
         value={String(exerciseDuration)}
         onChangeText={(d) => setExerciseDuration(+d)}
+        editable={!!workoutName} // Disable input if no workout is selected
       />
       <TextInput
         style={styles.input}
@@ -110,6 +114,7 @@ export function AddExercise({ workoutName }) {
         placeholderTextColor="#aaa"
         value={exerciseDurationUnits}
         onChangeText={setExerciseDurationUnits}
+        editable={!!workoutName} // Disable input if no workout is selected
       />
       <View style={styles.buttonContainer}>
         <Button
@@ -117,6 +122,7 @@ export function AddExercise({ workoutName }) {
           theme="primary"
           onPress={editExercise ? handleEditExercise : handleAddExercise}
           fontAwesomeName="send"
+          disabled={!workoutName} // Disable button if no workout is selected
         />
         {editExercise && (
           <Button label="Cancel Edit" theme="secondary" onPress={clearForm} />
