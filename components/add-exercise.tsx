@@ -10,6 +10,7 @@ export function AddExercise({ workoutName }) {
   const [exerciseDescription, setExerciseDescription] = useState("");
   const [exerciseDuration, setExerciseDuration] = useState(0);
   const [exerciseDurationUnits, setExerciseDurationUnits] = useState("");
+  const [sets, setSets] = useState(1); // Added sets state
   const { addExercise, editExercise, updateExercise, clearExerciseToEdit } =
     useContext(WorkoutContext);
   const [id, setId] = useState();
@@ -20,6 +21,7 @@ export function AddExercise({ workoutName }) {
       setExerciseDescription(editExercise["exerciseDescription"]);
       setExerciseDuration(editExercise["exerciseDuration"]);
       setExerciseDurationUnits(editExercise["exerciseDurationUnits"]);
+      setSets(editExercise["sets"]); // Set sets value
       setId(editExercise["id"]);
     } else {
       clearForm();
@@ -31,6 +33,7 @@ export function AddExercise({ workoutName }) {
     setExerciseDescription("");
     setExerciseDuration(0);
     setExerciseDurationUnits("");
+    setSets(1); // Reset sets value
     setId(undefined);
     clearExerciseToEdit();
   }
@@ -40,7 +43,8 @@ export function AddExercise({ workoutName }) {
       !exerciseName ||
       !exerciseDescription ||
       !exerciseDuration ||
-      !exerciseDurationUnits
+      !exerciseDurationUnits ||
+      !sets
     ) {
       Alert.alert("All fields are required");
       return;
@@ -51,6 +55,7 @@ export function AddExercise({ workoutName }) {
       exerciseDuration,
       exerciseDurationUnits,
       workoutName,
+      sets, // Added sets parameter
       id: uuidv4(),
     };
     addExercise(newExercisePayload);
@@ -63,7 +68,8 @@ export function AddExercise({ workoutName }) {
       !exerciseName ||
       !exerciseDescription ||
       !exerciseDuration ||
-      !exerciseDurationUnits
+      !exerciseDurationUnits ||
+      !sets
     ) {
       Alert.alert("All fields are required");
       return;
@@ -74,6 +80,7 @@ export function AddExercise({ workoutName }) {
       exerciseDuration,
       exerciseDurationUnits,
       workoutName,
+      sets, // Added sets parameter
       id,
     };
     updateExercise(editExercisePayload);
@@ -114,6 +121,15 @@ export function AddExercise({ workoutName }) {
         placeholderTextColor="#aaa"
         value={exerciseDurationUnits}
         onChangeText={setExerciseDurationUnits}
+        editable={!!workoutName} // Disable input if no workout is selected
+      />
+      <TextInput
+        style={styles.input}
+        keyboardType="numeric"
+        placeholder="Sets"
+        placeholderTextColor="#aaa"
+        value={String(sets)}
+        onChangeText={(s) => setSets(+s)}
         editable={!!workoutName} // Disable input if no workout is selected
       />
       <View style={styles.buttonContainer}>

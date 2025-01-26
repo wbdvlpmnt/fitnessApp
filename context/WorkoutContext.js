@@ -14,6 +14,7 @@ export const WorkoutProvider = ({ children }) => {
       exerciseDuration: 20,
       exerciseDurationUnits: "reps",
       workoutName: "Monday",
+      sets: 3, // Added sets parameter
     },
     {
       id: 2,
@@ -22,6 +23,7 @@ export const WorkoutProvider = ({ children }) => {
       exerciseDuration: 20,
       exerciseDurationUnits: "reps",
       workoutName: "Monday",
+      sets: 3, // Added sets parameter
     },
     {
       id: 3,
@@ -30,6 +32,7 @@ export const WorkoutProvider = ({ children }) => {
       exerciseDuration: 20,
       exerciseDurationUnits: "reps",
       workoutName: "Tuesday",
+      sets: 3, // Added sets parameter
     },
     {
       id: 4,
@@ -38,6 +41,7 @@ export const WorkoutProvider = ({ children }) => {
       exerciseDuration: 20,
       exerciseDurationUnits: "minutes",
       workoutName: "Tuesday",
+      sets: 1, // Added sets parameter
     },
     {
       id: 5,
@@ -46,6 +50,7 @@ export const WorkoutProvider = ({ children }) => {
       exerciseDuration: 5,
       exerciseDurationUnits: "variants",
       workoutName: "Tuesday",
+      sets: 1, // Added sets parameter
     },
   ]);
   const [editExercise, setEditExercise] = useState();

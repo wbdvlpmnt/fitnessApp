@@ -31,6 +31,7 @@ export default function ExerciseCard({ exercise, onEditExercise }) {
         <Text style={styles.cardDescription}>
           {exercise.exerciseDescription}
         </Text>
+        <Text style={styles.cardSets}>Sets: {String(exercise.sets)}</Text>
       </View>
       <FontAwesome
         name={"remove"}
@@ -67,6 +68,10 @@ const styles = StyleSheet.create({
   },
   cardDescription: {
     color: "#fff",
+    fontSize: 14,
+  },
+  cardSets: {
+    color: "#aaa", // Changed color for better readability
     fontSize: 14,
   },
 });
