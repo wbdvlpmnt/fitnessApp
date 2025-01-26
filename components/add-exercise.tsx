@@ -198,5 +198,6 @@ const styles = StyleSheet.create({
     height: "auto", // Adjusted height for better spacing
     justifyContent: "space-between",
     marginTop: 10, // Added margin for better spacing
+    width: 250,
   },
 });

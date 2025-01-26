@@ -97,13 +97,12 @@ export default function Button({
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    width: 320,
+    width: "100%",
     height: 60,
-    marginHorizontal: 20,
     alignItems: "center",
     justifyContent: "center",
     padding: 3,
-    margin:3
+    margin: 3,
   },
   button: {
     borderRadius: 10,

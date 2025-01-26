@@ -37,11 +37,6 @@ export default function NewWorkout({ workoutName, setWorkoutName, setActive }) {
           fontAwesomeName="save"
           onPress={() => handleAddNewWorkout(workoutName)}
         />
-        {/* <Button
-          label="Cancel"
-          theme="secondary"
-          onPress={() => setActive("Existing")}
-        /> */}
       </View>
     </View>
   );
@@ -74,7 +69,8 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "flex-start",
+    alignContent: "center",
     width: "100%",
   },
 });
