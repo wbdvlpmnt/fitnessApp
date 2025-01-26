@@ -1,5 +1,12 @@
 import { useContext, useEffect, useState } from "react";
-import { View, TextInput, StyleSheet, Alert, ScrollView } from "react-native";
+import {
+  View,
+  TextInput,
+  StyleSheet,
+  Alert,
+  ScrollView,
+  Text,
+} from "react-native";
 import Button from "./button";
 import { WorkoutContext } from "../context/WorkoutContext";
 import "react-native-get-random-values";
@@ -90,48 +97,62 @@ export function AddExercise({ workoutName }) {
 
   return (
     <ScrollView contentContainerStyle={styles.inputForm}>
-      <TextInput
-        style={styles.input}
-        placeholder="Exercise Name"
-        placeholderTextColor="#aaa"
-        value={exerciseName}
-        onChangeText={setExerciseName}
-        editable={!!workoutName} // Disable input if no workout is selected
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Exercise Description"
-        placeholderTextColor="#aaa"
-        value={exerciseDescription}
-        onChangeText={setExerciseDescription}
-        editable={!!workoutName} // Disable input if no workout is selected
-      />
-      <TextInput
-        style={styles.input}
-        keyboardType="numeric"
-        placeholder="Exercise Duration"
-        placeholderTextColor="#aaa"
-        value={String(exerciseDuration)}
-        onChangeText={(d) => setExerciseDuration(+d)}
-        editable={!!workoutName} // Disable input if no workout is selected
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Repitition Units"
-        placeholderTextColor="#aaa"
-        value={exerciseDurationUnits}
-        onChangeText={setExerciseDurationUnits}
-        editable={!!workoutName} // Disable input if no workout is selected
-      />
-      <TextInput
-        style={styles.input}
-        keyboardType="numeric"
-        placeholder="Sets"
-        placeholderTextColor="#aaa"
-        value={String(sets)}
-        onChangeText={(s) => setSets(+s)}
-        editable={!!workoutName} // Disable input if no workout is selected
-      />
+      <View style={styles.inputGroup}>
+        <Text style={styles.label}>Exercise Name</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Exercise Name"
+          placeholderTextColor="#aaa"
+          value={exerciseName}
+          onChangeText={setExerciseName}
+          editable={!!workoutName} // Disable input if no workout is selected
+        />
+      </View>
+      <View style={styles.inputGroup}>
+        <Text style={styles.label}>Exercise Description</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Exercise Description"
+          placeholderTextColor="#aaa"
+          value={exerciseDescription}
+          onChangeText={setExerciseDescription}
+          editable={!!workoutName} // Disable input if no workout is selected
+        />
+      </View>
+      <View style={styles.inputGroup}>
+        <Text style={styles.label}>Number of Reps or Duration </Text>
+        <TextInput
+          style={styles.input}
+          keyboardType="numeric"
+          placeholder="Number of Reps or Duration ..."
+          placeholderTextColor="#aaa"
+          value={exerciseDuration ? String(exerciseDuration) : ""}
+          onChangeText={(d) => setExerciseDuration(+d)}
+          editable={!!workoutName} // Disable input if no workout is selected
+        />
+      </View>
+      <View style={styles.inputGroup}>
+        <Text style={styles.label}>Unit of measure for Reps, Duration</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Unit of measure for Reps, Duration..."
+          value={exerciseDurationUnits}
+          onChangeText={setExerciseDurationUnits}
+          editable={!!workoutName} // Disable input if no workout is selected
+        />
+      </View>
+      <View style={styles.inputGroup}>
+        <Text style={styles.label}>Sets</Text>
+        <TextInput
+          style={styles.input}
+          keyboardType="numeric"
+          placeholder="Sets"
+          placeholderTextColor="#aaa"
+          value={sets ? String(sets) : ""}
+          onChangeText={(s) => setSets(+s)}
+          editable={!!workoutName} // Disable input if no workout is selected
+        />
+      </View>
       <View style={styles.buttonContainer}>
         <Button
           label={editExercise ? "Save Exercise" : "Add Exercise"}
@@ -150,11 +171,14 @@ export function AddExercise({ workoutName }) {
 
 const styles = StyleSheet.create({
   inputForm: {
-    padding: 20,
     width: "100%",
     height: "100%",
     alignItems: "center",
     backgroundColor: "#1e1e1e", // Changed background color for better contrast
+  },
+  inputGroup: {
+    width: "100%",
+    marginBottom: 10, // Adjusted margin for better spacing
   },
   input: {
     width: 300,
@@ -162,12 +186,16 @@ const styles = StyleSheet.create({
     color: "#fff",
     borderRadius: 8,
     padding: 10,
-    marginBottom: 15,
     fontSize: 16,
+  },
+  label: {
+    color: "#aaa",
+    marginBottom: 5,
   },
   buttonContainer: {
     display: "flex",
-    height: 150,
+    height: "auto", // Adjusted height for better spacing
     justifyContent: "space-between",
+    marginTop: 10, // Added margin for better spacing
   },
 });

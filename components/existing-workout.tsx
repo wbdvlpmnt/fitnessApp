@@ -14,7 +14,8 @@ export default function ExistingWorkout({ workoutName, setWorkoutName }) {
     { label: "Apple", value: "apple" },
     { label: "Banana", value: "banana" },
   ]);
-  const { workouts, clearExerciseToEdit, exerciseToEdit, editExercise } = useContext(WorkoutContext);
+  const { workouts, clearExerciseToEdit, exerciseToEdit, editExercise } =
+    useContext(WorkoutContext);
   const [activeTab, setActiveTab] = useState("view"); // State to manage active tab
 
   useEffect(() => {
@@ -61,20 +62,35 @@ export default function ExistingWorkout({ workoutName, setWorkoutName }) {
           style={[styles.tab, activeTab === "view" && styles.activeTab]}
           onPress={() => setActiveTab("view")}
         >
-          <Text style={[styles.tabText, activeTab === "view" && styles.activeTabText]}>View Exercises</Text>
+          <Text
+            style={[
+              styles.tabText,
+              activeTab === "view" && styles.activeTabText,
+            ]}
+          >
+            View Exercises
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.tab, activeTab === "add" && styles.activeTab]}
           onPress={() => setActiveTab("add")}
         >
-          <Text style={[styles.tabText, activeTab === "add" && styles.activeTabText]}>
+          <Text
+            style={[
+              styles.tabText,
+              activeTab === "add" && styles.activeTabText,
+            ]}
+          >
             {editExercise ? "Edit Exercise" : "Add Exercise"}
           </Text>
         </TouchableOpacity>
       </View>
 
       {activeTab === "view" ? (
-        <ViewExercises workoutName={workoutName} onEditExercise={handleEditExercise} />
+        <ViewExercises
+          workoutName={workoutName}
+          onEditExercise={handleEditExercise}
+        />
       ) : (
         <AddExercise workoutName={workoutName} />
       )}
@@ -87,7 +103,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#3a3f47",
     borderColor: "#3dffff",
     borderRadius: 10,
-    marginBottom: 10,
+    marginBottom: 5,
   },
   placeholder: {
     color: "#aaa",
