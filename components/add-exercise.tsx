@@ -124,7 +124,7 @@ export function AddExercise({ workoutName }) {
         <TextInput
           style={styles.input}
           keyboardType="numeric"
-          placeholder="Number of Reps or Duration ..."
+          placeholder="Number of Reps or Duration"
           placeholderTextColor="#aaa"
           value={exerciseDuration ? String(exerciseDuration) : ""}
           onChangeText={(d) => setExerciseDuration(+d)}
@@ -135,7 +135,8 @@ export function AddExercise({ workoutName }) {
         <Text style={styles.label}>Unit of measure for Reps, Duration</Text>
         <TextInput
           style={styles.input}
-          placeholder="Unit of measure for Reps, Duration..."
+          placeholder="Unit of measure for Reps, Duration"
+          placeholderTextColor="#aaa"
           value={exerciseDurationUnits}
           onChangeText={setExerciseDurationUnits}
           editable={!!workoutName} // Disable input if no workout is selected
