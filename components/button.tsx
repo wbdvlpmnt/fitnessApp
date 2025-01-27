@@ -98,10 +98,10 @@ export default function Button({
 const styles = StyleSheet.create({
   buttonContainer: {
     width: "100%",
-    height: 60,
+    height: 50,
     alignItems: "center",
     justifyContent: "center",
-    padding: 3,
+    padding: 2,
     margin: 3,
   },
   button: {

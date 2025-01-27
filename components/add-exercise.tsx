@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#3a3f47",
     color: "#fff",
     borderRadius: 8,
-    padding: 10,
+    padding: 8,
     fontSize: 16,
   },
   label: {
@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
     display: "flex",
     height: "auto", // Adjusted height for better spacing
     justifyContent: "space-between",
-    marginTop: 10, // Added margin for better spacing
+    marginTop: 1, // Added margin for better spacing
     width: 250,
   },
 });
