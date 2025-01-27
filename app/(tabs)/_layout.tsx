@@ -31,6 +31,19 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="start"
+        options={{
+          title: "Start Workout",
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons
+              name={focused ? "play" : "play-outline"}
+              color={color}
+              size={24}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="workout"
         options={{
           title: "Workout Manager",
