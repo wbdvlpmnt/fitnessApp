@@ -1,9 +1,16 @@
 import React from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 
-export default function ExerciseCardCheckbox({ exercise }) {
+export default function ExerciseCardCheckbox({
+  exercise,
+  onPress,
+  isCompleted,
+}) {
   return (
-    <View style={styles.card}>
+    <TouchableOpacity
+      onPress={onPress}
+      style={[styles.card, isCompleted && styles.completedCard]}
+    >
       <View style={styles.cardContent}>
         <Text style={styles.exerciseName}>{exercise.exerciseName}</Text>
         <Text style={styles.exerciseDescription}>
@@ -16,8 +23,9 @@ export default function ExerciseCardCheckbox({ exercise }) {
             {exercise.exerciseDurationUnits}
           </Text>
         </View>
+        {isCompleted && <Text style={styles.completedText}>Completed</Text>}
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 
@@ -33,6 +41,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 5,
     elevation: 3,
+  },
+  completedCard: {
+    backgroundColor: "#d3ffd3",
   },
   cardContent: {
     display: "flex",
@@ -57,5 +68,12 @@ const styles = StyleSheet.create({
   detailText: {
     color: "#333",
     fontSize: 14,
+  },
+  completedText: {
+    position: "absolute",
+    top: 10,
+    right: 10,
+    color: "#28a745",
+    fontWeight: "bold",
   },
 });
