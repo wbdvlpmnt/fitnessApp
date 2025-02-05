@@ -23,7 +23,7 @@ export default function ExerciseCardCheckbox({
             {exercise.exerciseDurationUnits}
           </Text>
         </View>
-        {isCompleted && <Text style={styles.completedText}>Completed</Text>}
+        {isCompleted && <Text style={styles.completedText}>Complete</Text>}
       </View>
     </TouchableOpacity>
   );
@@ -43,7 +43,8 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   completedCard: {
-    backgroundColor: "#d3ffd3",
+    borderWidth: 2,
+    borderColor: "#3dffff",
   },
   cardContent: {
     display: "flex",

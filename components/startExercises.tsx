@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
-import { ScrollView, StyleSheet, Alert, View } from 'react-native';
-import ExerciseCardCheckbox from './exercise-card-checkbox';
-import Button from './button';
-import * as Animatable from 'react-native-animatable';
+import React, { useContext, useState } from "react";
+import { ScrollView, StyleSheet, Alert, View } from "react-native";
+import ExerciseCardCheckbox from "./exercise-card-checkbox";
+import Button from "./button";
+import * as Animatable from "react-native-animatable";
+import { WorkoutContext } from "@/context/WorkoutContext";
 
 export default function StartExercises({ exercises }) {
   const [completedExercises, setCompletedExercises] = useState<number[]>([]);
+  const { saveWorkoutLog } = useContext(WorkoutContext);
 
   const toggleExerciseCompletion = (exerciseId) => {
     setCompletedExercises((prev) =>
@@ -15,7 +17,18 @@ export default function StartExercises({ exercises }) {
     );
   };
 
-  const allExercisesCompleted = exercises.length > 0 && completedExercises.length === exercises.length;
+  const allExercisesCompleted =
+    exercises.length > 0 && completedExercises.length === exercises.length;
+
+  function handleLogWorkout() {
+    Alert.alert("Workout Complete!");
+    const date = new Date().toLocaleDateString();
+    const logWorkoutPayload = {
+      date,
+      exercises,
+    };
+    saveWorkoutLog(logWorkoutPayload);
+  }
 
   return (
     <>
@@ -26,7 +39,7 @@ export default function StartExercises({ exercises }) {
               return (
                 <Animatable.View
                   key={exercise.id}
-                  animation={isCompleted ? 'fadeIn' : 'fadeIn'}
+                  animation={isCompleted ? "fadeIn" : "fadeIn"}
                   duration={500}
                 >
                   <ExerciseCardCheckbox
@@ -44,7 +57,7 @@ export default function StartExercises({ exercises }) {
           label="Workout Complete"
           theme="primary"
           fontAwesomeName="check"
-          onPress={() => Alert.alert('Workout Complete!')}
+          onPress={() => handleLogWorkout()}
         />
       )}
     </>
@@ -53,9 +66,9 @@ export default function StartExercises({ exercises }) {
 
 const styles = StyleSheet.create({
   workoutContainer: {
-    width: '100%',
+    width: "100%",
     padding: 20,
-    height: '80%',
-    backgroundColor: '#1e1e1e',
+    height: "80%",
+    backgroundColor: "#1e1e1e",
   },
 });

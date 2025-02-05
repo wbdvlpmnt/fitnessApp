@@ -5,6 +5,54 @@ export const WorkoutContext = createContext();
 
 // 2. Create Provider Component
 export const WorkoutProvider = ({ children }) => {
+  const [workoutLog, setWorkoutLog] = useState([
+    {
+      date: "2025-1-27",
+      exercises: [
+        {
+          id: 1,
+          exerciseName: "Push-ups",
+          exerciseDescription: "3 Sets - regular, wide, narrow",
+          exerciseDuration: 20,
+          exerciseDurationUnits: "reps",
+          workoutName: "Monday",
+          sets: 3,
+        },
+        {
+          id: 2,
+          exerciseName: "Sit-ups",
+          exerciseDescription: "3 Sets",
+          exerciseDuration: 20,
+          exerciseDurationUnits: "reps",
+          workoutName: "Monday",
+          sets: 3,
+        },
+      ],
+    },
+    {
+      date: "2025-2-14",
+      exercises: [
+        {
+          id: 3,
+          exerciseName: "Squats",
+          exerciseDescription: "Squat in-place",
+          exerciseDuration: 20,
+          exerciseDurationUnits: "reps",
+          workoutName: "Tuesday",
+          sets: 3,
+        },
+        {
+          id: 4,
+          exerciseName: "Walk",
+          exerciseDescription: "walking on treadmill",
+          exerciseDuration: 20,
+          exerciseDurationUnits: "minutes",
+          workoutName: "Tuesday",
+          sets: 1,
+        },
+      ],
+    },
+  ]);
   const [workouts, setWorkouts] = useState(["Monday", "Tuesday"]);
   const [exerciseList, setExerciseList] = useState([
     {
@@ -108,6 +156,10 @@ export const WorkoutProvider = ({ children }) => {
   const getExerciseList = (workoutName) =>
     exerciseList.filter((exercise) => exercise.workoutName == workoutName);
 
+  const saveWorkoutLog = (workout) => {
+    setWorkoutLog((prev) => [...prev, workout]);
+  };
+
   return (
     <WorkoutContext.Provider
       value={{
@@ -122,6 +174,8 @@ export const WorkoutProvider = ({ children }) => {
         editExercise,
         updateExercise,
         clearExerciseToEdit,
+        saveWorkoutLog,
+        workoutLog,
       }}
     >
       {children}
