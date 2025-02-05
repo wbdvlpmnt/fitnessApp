@@ -36,6 +36,7 @@ export default function Index() {
   return (
     <>
       <View style={styles.container}>
+        <Text style={styles.title}>Workout Summary</Text>
         <MetricCard metric={"Total Workouts"} value={totalWorkouts} />
         <MetricCard
           metric={"Workouts This Year"}
@@ -59,7 +60,7 @@ const styles = StyleSheet.create({
   },
   title: {
     color: "#fff",
-    fontSize: 24,
+    fontSize: 22,
     fontWeight: "bold", // Added bold font weight for better readability
   },
 });
